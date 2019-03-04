@@ -2,7 +2,7 @@ project_path: /web/tools/_project.yaml
 book_path: /web/tools/_book.yaml
 description: Understand and navigate DevTools using assistive technology.
 
-{# wf_updated_on: 2019-03-02 #}
+{# wf_updated_on: 2019-03-04 #}
 {# wf_published_on: 2019-03-02 #}
 {# wf_blink_components: Platform>DevTools #}
 
@@ -11,7 +11,7 @@ description: Understand and navigate DevTools using assistive technology.
 {% include "web/_shared/contributors/robdodson.html" %}
 
 This guide is intended to help users who primarily rely on assistive technology,
-like a screen reader, to access Chrome DevTools.
+such as screen readers, to access Chrome DevTools.
 
 Before starting, it helps to have a mental model of how the DevTools interface
 is structured. The DevTools are divided into a series of **panels** which are
@@ -33,7 +33,8 @@ styles, event listeners, the accessibility tree, and much more.
 
 Because the accessibility of DevTools is a work-in-progress some panels and tabs
 will work better with assistive technology than others. This guide will attempt
-to highlight specific issues you may run into.
+to walk you through the panels which are the most accessible and highlight
+specific issues you may encounter along the way.
 
 // TODO: Is there a place where folks can subscribe for a11y updates?
 
@@ -256,45 +257,62 @@ the event listener is defined and its line number.
 // BUG: Can't get focus into the listboxes
 
 ### Accessibility tab
+With focus on the [**Accessibility**
+tab](/web/tools/chrome-devtools/css/reference#computed), press `Tab` to move
+focus inside and explore its contents.
+
+Within the Accessibility tab there are controls for exploring the accessibility
+tree, the ARIA attributes applied to an element, and its computed accessibility
+properties.
 
 #### Accessibility tree
+The accessibility tree is presented as an [ARIA
+tree](https://www.w3.org/TR/wai-aria-1.1/#tree) where each treeitem corresponds
+to an element in the DOM.
 
-#### ARIA attributes
+The accessibility tree will announce the computed role for the selected node.
+Generic elements like `div` and `span` will be announced as "GenericContainer"
+in the tree.
 
-// BUG: https://bugs.chromium.org/p/chromium/issues/detail?id=868480
+Use the arrow keys to traverse the tree and explore parent-child relationships.
 
-#### Computed properties
+#### Issues
 
-// BUG: https://bugs.chromium.org/p/chromium/issues/detail?id=868480
-
-## Console panel
-
-### Navigating the console
-
-// TODO: I couldn't figure out how to move up and read previous console messages
-
-### Inspecting an object in the console
-
-// TODO: I couldn't figure out how to move up and inspect an object
+- ARIA trees may not be properly exposed in Chrome for macOS screen readers like
+  VoiceOver. Please subscribe to [the chromium tracking
+  bug](https://bugs.chromium.org/p/chromium/issues/detail?id=868480) for more
+  information.
+- The ARIA Attributes and Computed Properties sections are marked up as ARIA
+  trees, but they do not currently have focus managmenet so they are not
+  keyboard operable.
 
 ## Audits panel
 
+// TODO: Is there a doc for the audits panel?
+
+The **Audits** panel let's you run a series of tests against a site to check
+for common issues related to performance, accessibility, SEO, and a number of
+other categories.
+
 ### Configuring and running an audit
+When the Audits panel is first opened, focus will be placed on the `Run Audit`
+button at the end of the form.
+
+By default the form will be configured to run audits for every category
+using mobile emulation on a simulated 3G connection. Use `Shift+Tab` or navigate
+back in Browse mode to change the audit settings.
+
+When you're ready to run the audit, navigate back to the `Run Audit` button and
+press `Enter`. Focus will move into a modal window with a `Cancel` button which
+allows you to exit the audit. You may hear a series of earcons as the audit runs
+and refreshes the page multiple times.
+
+#### Issues
+
+- The different sections of the configuration form are not currently marked up
+  with a `fieldset` element. It may be easier to navigate them in Browse mode
+  to figure out which controls are associated with each section.
+- There is no earcon or live region announcement when the audit is finished
+  running. Generally it takes about 30 seconds.
 
 ### Navigating the audit report
-
-## Application panel
-
-### Clearing storage
-
-### Inspecting storage
-
-// TODO: Opening Local storage, Session storage, or Cookies listboxes steals
-focus
-
-## Security panel
-
-### Security overview
-
-// TODO: What's the best way to get from the Overview button into the Security
-overview section?
