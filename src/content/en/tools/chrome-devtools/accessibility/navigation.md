@@ -313,6 +313,21 @@ and refreshes the page multiple times.
   with a `fieldset` element. It may be easier to navigate them in Browse mode
   to figure out which controls are associated with each section.
 - There is no earcon or live region announcement when the audit is finished
-  running. Generally it takes about 30 seconds.
+  running. Generally it takes about 30 seconds, after which you should be able
+  to navigate to the results. Using Browse mode may be the easiest way to reach
+  the results.
 
 ### Navigating the audit report
+The audit report is organized into sections that correspond with each of the
+audit categories.
+
+The report opens with a list of scores for each category. These scores are also
+links which can be used to skip to the relevant sections.
+
+Within each section are expandable `details` elements, which contain information
+relating to passed or failed audits. By default, only failing audits are shown.
+Each section ends with a final `details` element which contains all of the
+passed audits.
+
+To run a new audit, use `Shift+Tab` to exit the report and look for the `Perform
+an audit...` button.
